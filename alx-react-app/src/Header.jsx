@@ -1,4 +1,4 @@
-function WelcomeMessage() {
+function Header() {
     return (
         <div>
             <h1>Hello everyone, I am learning React at ALX!</h1>
@@ -8,4 +8,4 @@ function WelcomeMessage() {
     );
 }
 
-export default WelcomeMessage
+export default Header
