@@ -12,7 +12,7 @@ function Counter (){
 
         <button onClick={() => setCount(0)}>Reset</button>
     </div>
-  )
+  );
 }
 
 export default Counter
