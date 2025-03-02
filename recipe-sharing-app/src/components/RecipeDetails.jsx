@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRecipeStore } from '../recipeStore';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { EditRecipeForm } from './EditRecipeForm';
 import { DeleteRecipeButton } from './DeleteRecipeButton';
 
