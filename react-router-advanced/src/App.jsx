@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Profile from './Profile';  // Make sure to import Profile if you haven't already
-import BlogPost from './BlogPost'; // Import the BlogPost component
-import ProtectedRoute from './ProtectedRoute';
+import Profile from '.components/Profile';  // Make sure to import Profile if you haven't already
+import BlogPost from '.components/BlogPost'; // Import the BlogPost component
+import ProtectedRoute from '.components/ProtectedRoute';
 
 function App() {
   return (
