@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 
 export const RegistrationForm = () => {
-  // Manage form state
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
+  // Manage form state with individual state for each field
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   // Manage error messages
   const [errors, setErrors] = useState({
@@ -18,10 +16,14 @@ export const RegistrationForm = () => {
   // Handle change of input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    if (name === 'username') {
+      setUsername(value);
+    } else if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
   };
 
   // Validate form fields
@@ -29,20 +31,21 @@ export const RegistrationForm = () => {
     let valid = true;
     const newErrors = { username: '', email: '', password: '' };
 
-    if (!formData.username.trim()) {
+    // Validation checks for username, email, and password
+    if (!username.trim()) {
       newErrors.username = 'Username is required';
       valid = false;
     }
 
-    if (!formData.email.trim()) {
+    if (!email.trim()) {
       newErrors.email = 'Email is required';
       valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Email is not valid';
       valid = false;
     }
 
-    if (!formData.password.trim()) {
+    if (!password.trim()) {
       newErrors.password = 'Password is required';
       valid = false;
     }
@@ -58,30 +61,26 @@ export const RegistrationForm = () => {
     // Validate form before submission
     if (validateForm()) {
       // Simulate form submission (e.g., API call)
-      console.log('Form submitted successfully:', formData);
+      console.log('Form submitted successfully:', { username, email, password });
 
       // Reset form after submission
-      setFormData({
-        username: '',
-        email: '',
-        password: '',
-      });
+      setUsername('');
+      setEmail('');
+      setPassword('');
     }
   };
-
-  // Destructure formData for easier access
-  const { username, email, password } = formData;
 
   return (
     <form className="create" onSubmit={handleSubmit}>
       <h1>Registration Form</h1>
+
       <div>
         <label htmlFor="username">Username:</label>
         <input
           type="text"
           id="username"
           name="username"
-          value={username} // Destructured variable
+          value={username}  // Correct structure as required: value={username}
           onChange={handleChange}
         />
         {errors.username && <span style={{ color: 'red' }}>{errors.username}</span>}
@@ -93,7 +92,7 @@ export const RegistrationForm = () => {
           type="email"
           id="email"
           name="email"
-          value={email} // Destructured variable
+          value={email}  // Correct structure as required: value={email}
           onChange={handleChange}
         />
         {errors.email && <span style={{ color: 'red' }}>{errors.email}</span>}
@@ -105,7 +104,7 @@ export const RegistrationForm = () => {
           type="password"
           id="password"
           name="password"
-          value={password} // Destructured variable
+          value={password}  // Correct structure as required: value={password}
           onChange={handleChange}
         />
         {errors.password && <span style={{ color: 'red' }}>{errors.password}</span>}
