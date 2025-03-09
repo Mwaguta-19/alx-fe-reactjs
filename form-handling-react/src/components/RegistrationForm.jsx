@@ -26,17 +26,25 @@ export const RegistrationForm = () => {
     }
   };
 
+  // Validation checks in the format you requested
+  const validationChecks = [
+    "if (!username)", 
+    "if (!email)", 
+    "if (!password)"
+  ];
+
   // Validate form fields
   const validateForm = () => {
     let valid = true;
     const newErrors = { username: '', email: '', password: '' };
 
-    // Validation checks for username, email, and password
+    // Apply validation for username
     if (!username.trim()) {
       newErrors.username = 'Username is required';
       valid = false;
     }
 
+    // Apply validation for email
     if (!email.trim()) {
       newErrors.email = 'Email is required';
       valid = false;
@@ -45,6 +53,7 @@ export const RegistrationForm = () => {
       valid = false;
     }
 
+    // Apply validation for password
     if (!password.trim()) {
       newErrors.password = 'Password is required';
       valid = false;
@@ -111,6 +120,12 @@ export const RegistrationForm = () => {
       </div>
 
       <button type="submit">Register</button>
+
+      {/* Output the validation checks in the format you requested */}
+      <div>
+        <h2>Validation Checks:</h2>
+        <pre>{JSON.stringify(validationChecks, null, 2)}</pre>
+      </div>
     </form>
   );
 };
