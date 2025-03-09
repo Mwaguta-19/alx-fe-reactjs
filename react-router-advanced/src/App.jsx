@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Profile from '.components/Profile';
+import Profile from './Profile';  // Make sure to import Profile if you haven't already
+import BlogPost from './BlogPost'; // Import the BlogPost component
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   return (
@@ -10,7 +12,19 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/profile/*" element={<Profile />} />
+          
+          {/* Dynamic Blog Post Route */}
+          <Route path="/blog/:id" element={<BlogPost />} />
+          
+          {/* Protected Route for Profile */}
+          <Route
+            path="/profile/*"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
     </Router>
