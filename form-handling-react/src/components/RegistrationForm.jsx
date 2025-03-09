@@ -1,31 +1,31 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 
 export const RegistrationForm = () => {
+  // Manage form state
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
 
-    const [formData, setFormData]= useState({
-        username:'',
-        name: '',
-        password: '',
-    });
+  // Manage error messages
+  const [errors, setErrors] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
 
-    const [errors, setErrors] = useState({
-        username: '',
-        email: '',
-        password: "",
+  // Handle change of input fields
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-    });
-
-    const handleChange = (e) => {
-
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
-    }
-
-     // Basic validation function to check if any fields are empty
-    const validateForm = () => {
+  // Validate form fields
+  const validateForm = () => {
     let valid = true;
     const newErrors = { username: '', email: '', password: '' };
 
@@ -35,50 +35,53 @@ export const RegistrationForm = () => {
     }
 
     if (!formData.email.trim()) {
-        newErrors.email = 'Email is required';
-        valid = false;
-      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-        newErrors.email = 'Email is not valid';
-        valid = false;
-      }
-  
-      if (!formData.password.trim()) {
-        newErrors.password = 'Password is required';
-        valid = false;
-      }
-  
-      setErrors(newErrors);
-      return valid;
-    };
+      newErrors.email = 'Email is required';
+      valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email is not valid';
+      valid = false;
+    }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    
-        // Validate form before submission
-        if (validateForm()) {
-          // Simulate form submission (e.g., API call)
-          console.log('Form submitted successfully:', formData);
-    
-          // Reset form
-          setFormData({
-            username: '',
-            email: '',
-            password: '',
-          });
-        }
-      };
+    if (!formData.password.trim()) {
+      newErrors.password = 'Password is required';
+      valid = false;
+    }
 
-        
+    setErrors(newErrors);
+    return valid;
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate form before submission
+    if (validateForm()) {
+      // Simulate form submission (e.g., API call)
+      console.log('Form submitted successfully:', formData);
+
+      // Reset form after submission
+      setFormData({
+        username: '',
+        email: '',
+        password: '',
+      });
+    }
+  };
+
+  // Destructure formData for easier access
+  const { username, email, password } = formData;
+
   return (
-    <form className ="create" onSubmit={handleSubmit}>
-    <h1>Registration Form</h1>
+    <form className="create" onSubmit={handleSubmit}>
+      <h1>Registration Form</h1>
       <div>
         <label htmlFor="username">Username:</label>
         <input
           type="text"
           id="username"
           name="username"
-          value={formData.username}
+          value={username} // Destructured variable
           onChange={handleChange}
         />
         {errors.username && <span style={{ color: 'red' }}>{errors.username}</span>}
@@ -90,7 +93,7 @@ export const RegistrationForm = () => {
           type="email"
           id="email"
           name="email"
-          value={formData.email}
+          value={email} // Destructured variable
           onChange={handleChange}
         />
         {errors.email && <span style={{ color: 'red' }}>{errors.email}</span>}
@@ -102,7 +105,7 @@ export const RegistrationForm = () => {
           type="password"
           id="password"
           name="password"
-          value={formData.password}
+          value={password} // Destructured variable
           onChange={handleChange}
         />
         {errors.password && <span style={{ color: 'red' }}>{errors.password}</span>}
@@ -110,6 +113,5 @@ export const RegistrationForm = () => {
 
       <button type="submit">Register</button>
     </form>
-    
   );
-}
+};
