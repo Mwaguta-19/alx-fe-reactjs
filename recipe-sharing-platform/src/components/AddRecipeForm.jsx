@@ -26,7 +26,7 @@ const AddRecipeForm = () => {
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto">
+    <div className="p-6 max-w-md mx-auto shadow-lg rounded-lg bg-white">
       <h2 className="text-2xl font-bold mb-4">Add a New Recipe</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -36,7 +36,7 @@ const AddRecipeForm = () => {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full border rounded-lg p-2"
+            className="w-full border rounded-lg p-2 shadow-sm"
             placeholder="Recipe Title"
           />
           {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
@@ -47,7 +47,7 @@ const AddRecipeForm = () => {
             id="ingredients"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className="w-full border rounded-lg p-2"
+            className="w-full border rounded-lg p-2 shadow-sm"
             placeholder="Ingredients"
           />
           {errors.ingredients && <p className="text-red-500 text-sm">{errors.ingredients}</p>}
@@ -58,12 +58,14 @@ const AddRecipeForm = () => {
             id="steps"
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
-            className="w-full border rounded-lg p-2"
+            className="w-full border rounded-lg p-2 shadow-sm"
             placeholder="Preparation Steps"
           />
           {errors.steps && <p className="text-red-500 text-sm">{errors.steps}</p>}
         </div>
-        <button type="submit" className="bg-blue-500 text-white py-2 px-6 rounded-lg">Submit Recipe</button>
+        <button type="submit" className="bg-blue-500 text-white py-2 px-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+          Submit Recipe
+        </button>
       </form>
     </div>
   );
