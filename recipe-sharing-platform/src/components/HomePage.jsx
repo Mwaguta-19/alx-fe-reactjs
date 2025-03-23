@@ -8,7 +8,6 @@ export default function HomePage() {
 
     useEffect(() => {
         // Set the mock data to the state (usually, you'd fetch data from an API)
-        console.log(data);
         setRecipe(data);
       }, []);
 
