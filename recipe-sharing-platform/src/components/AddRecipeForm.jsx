@@ -1,100 +1,72 @@
-// AddRecipeForm.jsx
 import React, { useState } from 'react';
 
-function AddRecipeForm() {
+const AddRecipeForm = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [steps, setSteps] = useState('');
   const [errors, setErrors] = useState({});
 
-  // Validate function to check all fields
   const validate = () => {
     const formErrors = {};
     if (!title) formErrors.title = 'Title is required';
     if (!ingredients) formErrors.ingredients = 'Ingredients are required';
-    else if (ingredients.split('\n').length < 2) formErrors.ingredients = 'Please add at least two ingredients';
-
     if (!steps) formErrors.steps = 'Preparation steps are required';
     return formErrors;
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform validation before submission
     const formErrors = validate();
-    
     if (Object.keys(formErrors).length === 0) {
-      // Proceed with form submission (you can handle API calls here)
-      console.log('New recipe submitted:', { title, ingredients, steps });
-      // Reset form after successful submission
-      setTitle('');
-      setIngredients('');
-      setSteps('');
+      // Handle form submission (e.g., save data)
+      alert('Recipe submitted!');
     } else {
-      // If there are errors, set the error state
       setErrors(formErrors);
     }
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="p-6 max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-4">Add a New Recipe</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Recipe Title */}
-        <div className="flex flex-col">
-          <label htmlFor="title" className="text-lg font-medium mb-2">Recipe Title</label>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label htmlFor="title" className="block text-sm font-medium mb-2">Title</label>
           <input
             type="text"
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="border border-gray-300 rounded-lg p-2"
-            placeholder="Enter recipe title"
+            className="w-full border rounded-lg p-2"
+            placeholder="Recipe Title"
           />
-          {errors.title && <p className="text-red-500 text-sm mt-2">{errors.title}</p>}
+          {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
         </div>
-
-        {/* Ingredients */}
-        <div className="flex flex-col">
-          <label htmlFor="ingredients" className="text-lg font-medium mb-2">Ingredients</label>
+        <div className="mb-4">
+          <label htmlFor="ingredients" className="block text-sm font-medium mb-2">Ingredients</label>
           <textarea
             id="ingredients"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className="border border-gray-300 rounded-lg p-2"
-            rows="4"
-            placeholder="Enter ingredients (one per line)"
+            className="w-full border rounded-lg p-2"
+            placeholder="Ingredients"
           />
-          {errors.ingredients && <p className="text-red-500 text-sm mt-2">{errors.ingredients}</p>}
+          {errors.ingredients && <p className="text-red-500 text-sm">{errors.ingredients}</p>}
         </div>
-
-        {/* Preparation Steps */}
-        <div className="flex flex-col">
-          <label htmlFor="steps" className="text-lg font-medium mb-2">Preparation Steps</label>
+        <div className="mb-4">
+          <label htmlFor="steps" className="block text-sm font-medium mb-2">Preparation Steps</label>
           <textarea
             id="steps"
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
-            className="border border-gray-300 rounded-lg p-2"
-            rows="4"
-            placeholder="Enter preparation steps"
+            className="w-full border rounded-lg p-2"
+            placeholder="Preparation Steps"
           />
-          {errors.steps && <p className="text-red-500 text-sm mt-2">{errors.steps}</p>}
+          {errors.steps && <p className="text-red-500 text-sm">{errors.steps}</p>}
         </div>
-
-        {/* Submit Button */}
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-200"
-          >
-            Submit Recipe
-          </button>
-        </div>
+        <button type="submit" className="bg-blue-500 text-white py-2 px-6 rounded-lg">Submit Recipe</button>
       </form>
     </div>
   );
-}
+};
 
 export default AddRecipeForm;
