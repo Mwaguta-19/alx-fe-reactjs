@@ -1,3 +1,4 @@
+// AddRecipeForm.jsx
 import React, { useState } from 'react';
 
 function AddRecipeForm() {
@@ -6,24 +7,32 @@ function AddRecipeForm() {
   const [steps, setSteps] = useState('');
   const [errors, setErrors] = useState({});
 
-  // Handle form submit
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Simple form validation
-    let formErrors = {};
+  // Validate function to check all fields
+  const validate = () => {
+    const formErrors = {};
     if (!title) formErrors.title = 'Title is required';
     if (!ingredients) formErrors.ingredients = 'Ingredients are required';
-    if (!steps) formErrors.steps = 'Preparation steps are required';
-    if (ingredients.split('\n').length < 2) formErrors.ingredients = 'Please add at least two ingredients';
+    else if (ingredients.split('\n').length < 2) formErrors.ingredients = 'Please add at least two ingredients';
 
-    // If no errors, proceed with form submission (e.g., posting data)
+    if (!steps) formErrors.steps = 'Preparation steps are required';
+    return formErrors;
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Perform validation before submission
+    const formErrors = validate();
+    
     if (Object.keys(formErrors).length === 0) {
+      // Proceed with form submission (you can handle API calls here)
       console.log('New recipe submitted:', { title, ingredients, steps });
       // Reset form after successful submission
       setTitle('');
       setIngredients('');
       setSteps('');
     } else {
+      // If there are errors, set the error state
       setErrors(formErrors);
     }
   };
