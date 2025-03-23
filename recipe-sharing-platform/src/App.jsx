@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <h1 className='text-blue-500'>Movie App</h1>        
+      <h1 className='text-center text-slate-600 margin-top'>Movie App</h1>        
     </>
   )
 }
