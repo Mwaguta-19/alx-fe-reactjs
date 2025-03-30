@@ -17,11 +17,11 @@ const Search = () => {
     try {
       const data = await fetchUserData(username); // Fetch user data from GitHub
 
-      // Check if the response is an error (e.g., user not found)
+      // Check if the response contains a user or an error message
       if (data.message === 'Not Found') {
-        setError("Looks like we can't find the user.");
+        setError("Looks like we can't find the user."); // Display error if user is not found
       } else {
-        setUser(data); // Set the user data if found
+        setUser(data); // Set the user data if the user is found
       }
     } catch (err) {
       setError("Something went wrong, please try again."); // General error handling
