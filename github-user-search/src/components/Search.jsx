@@ -16,9 +16,15 @@ const Search = () => {
 
     try {
       const data = await fetchUserData(username); // Fetch user data from GitHub
-      setUser(data); // Set the user data
+
+      // Check if the response is an error (e.g., user not found)
+      if (data.message === 'Not Found') {
+        setError("Looks like we can't find the user.");
+      } else {
+        setUser(data); // Set the user data if found
+      }
     } catch (err) {
-      setError("Looks like we can't find the user."); // Error handling
+      setError("Something went wrong, please try again."); // General error handling
     } finally {
       setLoading(false); // Stop loading state
     }
